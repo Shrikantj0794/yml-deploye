@@ -12,7 +12,7 @@ app.use(express.static(buildpath))//4
 
 app.use(cors({
     origin: ['http://localhost:3000', 'http://54.243.10.91:8080', '*'],
-    credentials: true,
+    // credentials: true,
 }));
 app.use(express.json());
 app.use(cookieParser());

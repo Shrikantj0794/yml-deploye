@@ -12,7 +12,7 @@ const buildpath = path.join(__dirname, "../frontend/build");
 app.use(express.static(buildpath));
 
 app.use(cors({
-    origin: '*',
+    origin: ['http://localhost:8080', 'http://44.210.125.47:8080'],
     credentials: true,
 }));
 

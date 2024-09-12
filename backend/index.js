@@ -3,22 +3,31 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 require('dotenv').config();
 const connectDB = require('./config/db');
-const router = require('./routes'); // Correctly importing the router from Routes
-const path = require('path')//1
+const router = require('./routes'); // Importing the router
+const path = require('path');
 const app = express();
-const _dirname = path.dirname('')//2
-const buildpath = path.join(_dirname, "../frontend/build")//3
-app.use(express.static(buildpath))//4
+
+// Serve static files from the React frontend app
+const buildpath = path.join(__dirname, "../frontend/build");
+app.use(express.static(buildpath));
 
 app.use(cors({
     origin: '*',
     credentials: true,
 }));
+
 app.use(express.json());
 app.use(cookieParser());
 
-app.use("/api", router); // Mounting the router correctly on the '/api' path
+// API routes
+app.use("/api", router);
 
+// Catch-all handler for all other routes (for React Router)
+app.get('/*', (req, res) => {
+    res.sendFile(path.join(buildpath, 'index.html'));
+});
+
+// Port and DB connection
 const PORT = process.env.PORT || 8080;
 
 connectDB().then(() => {

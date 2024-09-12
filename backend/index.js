@@ -11,8 +11,8 @@ const buildpath = path.join(_dirname, "../frontend/build")//3
 app.use(express.static(buildpath))//4
 
 app.use(cors({
-    origin: "*",
-    // credentials: true,
+    origin: '*',
+    credentials: true,
 }));
 app.use(express.json());
 app.use(cookieParser());
